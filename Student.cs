@@ -16,34 +16,39 @@ namespace C__LD
 
 		public static void createNewStudent()
 		{
-			Student student1 = new Student();
+			Student student = new Student();
 			Console.WriteLine("Iveskite studento varda:");
-			student1.Name = Console.ReadLine();
+			student.Name = Console.ReadLine();
 			Console.WriteLine("Iveskite studento pavarde:");
-			student1.Surname = Console.ReadLine();
+			student.Surname = Console.ReadLine();
 			
 			Console.WriteLine();
-			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
-			int homeWorkCount = Convert.ToInt32(Console.ReadLine());
+//			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
+//			int homeWorkCount = Convert.ToInt32(Console.ReadLine());
 			
-			double[] marks = new double[homeWorkCount];
+			double[] marks = new double[100];
 			double homeWorkSum = 0;
 			double homeWorkAvg = 0;
 			
 			Console.WriteLine();
-			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
-			for (int i = 0; i < homeWorkCount; i++) {
+			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\n jeigu daugiau pazymiu nera iveskite 0");
+			int count = 0;
+			for (int i = 0; i < 100; i++) {
 				marks[i] = Convert.ToDouble(Console.ReadLine());
 				homeWorkSum += marks[i];
+				if(Convert.ToDouble(Console.ReadLine()).Equals(0)){
+					count = i+1;
+					break;
+				}
 			}
-			homeWorkAvg = homeWorkSum / homeWorkCount;
+			homeWorkAvg = homeWorkSum / count;
 			Console.WriteLine();
 			
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
 			
-			student1.finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
-			students.Add(student1);
+			student.finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
+			students.Add(student);
 	
 			MainClass.showAll();
 		}

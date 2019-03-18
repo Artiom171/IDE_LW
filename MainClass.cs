@@ -15,10 +15,10 @@ namespace C__LD
 		}
 		public static void showAll()
 		{
-			foreach (Student s in Student.students)
-            {
-				Console.WriteLine(s);
-            }
+			Console.WriteLine("----------------------------------");
+			foreach (var item in Student.students) {
+				Console.WriteLine(item.Name + " " + item.Surname + " " + item.finalAvg);
+			}
 		}
 		
 		public static void Main(string[] args)
