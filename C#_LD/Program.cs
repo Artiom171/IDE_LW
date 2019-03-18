@@ -47,7 +47,7 @@ namespace C__LD
 			
 			double finalMark = 0;
 			
-			Console.WriteLine("Studento galutinis balas:");
+			Console.WriteLine("{0,-20} {1,5}\n", "Vardas", "Pavarde");
 			finalMark = (homeWorkAvg * 0.3) + (examResult * 0.7);
 			Console.WriteLine(finalMark);
 		}
