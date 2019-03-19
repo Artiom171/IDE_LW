@@ -5,6 +5,4 @@ This is a program that count the averages of student that are inputted by the us
 saved as objects and printed in console.
 
 # Still todo for version v0.1:
-*Median
-*Random makrs generator
-*Clean the code, make it readable
+Look for tab "Projects", you will see everything...:)
