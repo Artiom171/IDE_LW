@@ -13,13 +13,7 @@ namespace C__LD
 			Console.WriteLine("2 - perziureta sarasa esamu studentu");
 			Console.WriteLine("0 - baigti darba");
 		}
-		public static void showAll()
-		{
-			Console.WriteLine("----------------------------------");
-			foreach (var item in Student.students) {
-				Console.WriteLine(item.Name + " " + item.Surname + " " + item.finalAvg);
-			}
-		}
+		
 		
 		public static void Main(string[] args)
 		{
@@ -31,7 +25,7 @@ namespace C__LD
 						Student.createNewStudent();
 						break;
 					case 2:
-						showAll();
+						Student.showAll();
 						break;
 					case 0:
 						break;
