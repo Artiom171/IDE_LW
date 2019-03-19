@@ -29,8 +29,7 @@ namespace C__LD
 			
 			Console.WriteLine();
 			
-			
-			homeWorkAverageCountWithArray();
+			menuIn();
 			//homeWorkAverageCountWithList();
 			sumExamResultWithHomeWork();
 			students.Add(student);
@@ -73,24 +72,56 @@ namespace C__LD
 		}
 		
 //		Counting homework with an List, when we don't know how much homework there was
-		public static double homeWorkAverageCountWithList()
+//		public static double homeWorkAverageCountWithList()
+//		{
+//			var marks = new List<double>();
+//			
+//			Console.WriteLine();
+//			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
+//			double notZero = 0;
+//			do {
+//				notZero = Convert.ToInt32(Console.ReadLine());
+//				marks.Add(notZero);
+//			} while (notZero != 0.0);
+//			marks.Sort();
+//
+//			foreach (var item in marks) {
+//				homeWorkSum += item;
+//			}
+//			homeWorkAvg = homeWorkSum / marks.Count;
+//			return homeWorkAvg;
+//		}
+//      median count here		
+		public static double MedianAverageCountWithAnArray()
 		{
-			var marks = new List<double>();
-			
-			Console.WriteLine();
-			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
-			double notZero = 0;
-			do {
-				notZero = Convert.ToInt32(Console.ReadLine());
-				marks.Add(notZero);
-			} while (notZero != 0.0);
-			marks.Sort();
+			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
+			int count = Convert.ToInt32(Console.ReadLine());
 
-			foreach (var item in marks) {
-				homeWorkSum += item;
+			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
+			var marks = new double[100];
+			Student.homeWorkSum = 0;
+			homeWorkAvg = 0;
+			
+			for (int i = 0; i < count; i++) {
+				marks[i] = Convert.ToDouble(Console.ReadLine());
 			}
-			homeWorkAvg = homeWorkSum / marks.Count;
-			return homeWorkAvg;
+			Array.Sort(marks);
+			int dir = 0;
+			int secondDir = 0;
+			double median = 0;
+			if(count %2 != 0){
+				dir = (count/2);
+				median = marks[99-dir];
+			} else if(count %2 == 0){
+				dir = (count/2);
+				secondDir = dir - 1;
+				median = ((marks[99-dir])+(marks[99-secondDir]))/2;
+			}
+			
+			
+//			dir is integer that show what element in the array will be the median
+			Console.WriteLine(median);
+			return median;
 		}
 		
 //		Summing up home work average to exam result, appears the finaAvg
@@ -101,6 +132,25 @@ namespace C__LD
 			
 			finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
 			return finalAvg;
+		}
+		
+		public static void menuIn()
+		{
+			
+			Console.WriteLine("Spauskite 1, jeigu norite kad programa isvestu vidurki");
+			Console.WriteLine("Spauskite 2, jeigu norite kad programa isvestu mediana");
+			int choice = Convert.ToInt32(Console.ReadLine());
+			switch(choice){
+				case 1:
+					homeWorkAverageCountWithArray();
+					break;
+				case 2:
+					MedianAverageCountWithAnArray();
+					break;
+				default:
+					Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
+					break;
+			}
 		}
 	}
 }
