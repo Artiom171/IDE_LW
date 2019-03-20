@@ -15,7 +15,7 @@ namespace C__LD
 		public static double finalAvg{ get; set; }
 		public static double homeWorkAvg{ get; set; }
 		public static double homeWorkSum{ get; set; }
-//		public double finalAvgMed{get; set;}
+		public static double AvgMed{get; set;}
 		public static List <Student> students = new List<Student>();
 
 //      creating new object Student and adding it in the students List
@@ -31,10 +31,9 @@ namespace C__LD
 			
 			menuIn();
 			//homeWorkAverageCountWithList();
-			sumExamResultWithHomeWork();
 			students.Add(student);
 	
-			showAll();
+			showStudent();
 		}
 		
 //      Print all the students from the sudents list
@@ -42,6 +41,8 @@ namespace C__LD
 		{
 			Console.WriteLine("----------------------------------");
 			foreach (var item in students) {
+				// problema v etom finalAvg, ja ne mogu k nemu obrasiatsia cherez item., potomu chto on static, navernoe
+				// poluciaetsia kogda vvozhu vtorogo studenta, on perepisyvaet staryj finalAvg i on stanovitsia odinkovym o oboih
 				Console.WriteLine(string.Format("{0} {1} {2}", item.Name, item.Surname, finalAvg));
 			}
 		}
@@ -50,6 +51,7 @@ namespace C__LD
 		public static void showStudent()
 		{
 			Console.WriteLine("----------------------------------");
+			Console.WriteLine(string.Format("{0} {1} {2}", students., createNewStudent.Surname, createNewStudent.finalAvg));
 		}
 		
 //		Counting home work average with an array, when we know the amount of home work
@@ -92,7 +94,7 @@ namespace C__LD
 //			return homeWorkAvg;
 //		}
 //      median count here		
-		public static double MedianAverageCountWithAnArray()
+		public static double MedianAverageCountWithArray()
 		{
 			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
 			int count = Convert.ToInt32(Console.ReadLine());
@@ -108,24 +110,24 @@ namespace C__LD
 			Array.Sort(marks);
 			int dir = 0;
 			int secondDir = 0;
-			double median = 0;
+			AvgMed = 0;
 			if(count %2 != 0){
 				dir = (count/2);
-				median = marks[99-dir];
+				AvgMed = marks[99-dir];
 			} else if(count %2 == 0){
 				dir = (count/2);
 				secondDir = dir - 1;
-				median = ((marks[99-dir])+(marks[99-secondDir]))/2;
+				AvgMed = ((marks[99-dir])+(marks[99-secondDir]))/2;
 			}
 			
 			
 //			dir is integer that show what element in the array will be the median
-			Console.WriteLine(median);
-			return median;
+//			Console.WriteLine(finalAvgMed);
+			return AvgMed;
 		}
 		
 //		Summing up home work average to exam result, appears the finaAvg
-		public static double sumExamResultWithHomeWork()
+		public static double sumExamResultWithHomeWorkAverage()
 		{
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
@@ -134,7 +136,16 @@ namespace C__LD
 			return finalAvg;
 		}
 		
-		public static void menuIn()
+		public static double sumExamResultWithMedian()
+		{
+			Console.WriteLine("Iveskite egzamino rezultata:");
+			double examResult = Convert.ToDouble(Console.ReadLine());
+			
+			finalAvg = (AvgMed * 0.3) + (examResult * 0.7);
+			return finalAvg;
+		}
+		
+		public static double menuIn()
 		{
 			
 			Console.WriteLine("Spauskite 1, jeigu norite kad programa isvestu vidurki");
@@ -143,14 +154,17 @@ namespace C__LD
 			switch(choice){
 				case 1:
 					homeWorkAverageCountWithArray();
+					sumExamResultWithHomeWorkAverage();
 					break;
 				case 2:
-					MedianAverageCountWithAnArray();
+					MedianAverageCountWithArray();
+					sumExamResultWithMedian();
 					break;
 				default:
 					Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
 					break;
 			}
+			return finalAvg;
 		}
 	}
 }
