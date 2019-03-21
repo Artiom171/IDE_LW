@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
 
 
 
@@ -9,17 +8,18 @@ namespace C__LD
 
 	public class Student
 	{
-//		fields
+		//		fields
 		public string Name{ get; set; }
 		public string Surname{ get; set; }
-		public static double finalAvg{ get; set; }
-		public static double homeWorkAvg{ get; set; }
-		public static double homeWorkSum{ get; set; }
-		public static double AvgMed{get; set;}
-		public static List <Student> students = new List<Student>();
+		public double finalAvg{ get; set; }
+		public double homeWorkAvg{ get; set; }
+		public double homeWorkSum{ get; set; }
+		public double AvgMed{ get; set; }
+		
+		
 
-//      creating new object Student and adding it in the students List
-		public static void createNewStudent()
+		//      creating new object Student and adding it in the students List
+		public void createNewStudent()
 		{
 			Student student = new Student();
 			Console.WriteLine("Iveskite studento varda:");
@@ -27,42 +27,45 @@ namespace C__LD
 			Console.WriteLine("Iveskite studento pavarde:");
 			student.Surname = Console.ReadLine();
 			
+			
 			Console.WriteLine();
 			
-			menuIn();
+			menuIn(student);
 			//homeWorkAverageCountWithList();
-			students.Add(student);
+			MainClass.students.Add(student);
 	
-			showStudent();
+			showStudent(student);
 		}
 		
-//      Print all the students from the sudents list
-		public static void showAll()
+		//      Print all the students from the sudents list
+		public void showAll()
 		{
-			Console.WriteLine("----------------------------------");
-			foreach (var item in students) {
-				// problema v etom finalAvg, ja ne mogu k nemu obrasiatsia cherez item., potomu chto on static, navernoe
-				// poluciaetsia kogda vvozhu vtorogo studenta, on perepisyvaet staryj finalAvg i on stanovitsia odinkovym o oboih
-				Console.WriteLine(string.Format("{0} {1} {2}", item.Name, item.Surname, finalAvg));
+			Console.WriteLine(("").PadLeft(55,'-'));
+			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
+			Console.WriteLine(("").PadLeft(55,'-'));
+			foreach (var item in MainClass.students) {
+				Console.WriteLine("{0,-10}{1,-20}{2,20}", item.Name, item.Surname, item.finalAvg);
 			}
 		}
 
-//		Print one student, last that is created, after it is created
-		public static void showStudent()
+		//		Print one student, last that is created, after it is created
+		public void showStudent(Student student)
 		{
-			Console.WriteLine("----------------------------------");
-			Console.WriteLine(string.Format("{0} {1} {2}", students., createNewStudent.Surname, createNewStudent.finalAvg));
+			Console.WriteLine(("").PadLeft(55,'-'));
+			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
+			Console.WriteLine(("").PadLeft(55,'-'));
+			Console.WriteLine("{0,-10}{1,-20}{2,20}", student.Name, student.Surname, student.finalAvg);
 		}
 		
-//		Counting home work average with an array, when we know the amount of home work
-		public static double homeWorkAverageCountWithArray()
+		//		Counting home work average with an array, when we know the amount of home work
+		public double homeWorkAverageCountWithArray()
 		{
 			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
 			int count = Convert.ToInt32(Console.ReadLine());
 
 			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
 			var marks = new double[100];
-			Student.homeWorkSum = 0;
+			
 			homeWorkAvg = 0;
 			
 			for (int i = 0; i < count; i++) {
@@ -73,35 +76,35 @@ namespace C__LD
 			return homeWorkAvg;
 		}
 		
-//		Counting homework with an List, when we don't know how much homework there was
-//		public static double homeWorkAverageCountWithList()
-//		{
-//			var marks = new List<double>();
-//			
-//			Console.WriteLine();
-//			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
-//			double notZero = 0;
-//			do {
-//				notZero = Convert.ToInt32(Console.ReadLine());
-//				marks.Add(notZero);
-//			} while (notZero != 0.0);
-//			marks.Sort();
-//
-//			foreach (var item in marks) {
-//				homeWorkSum += item;
-//			}
-//			homeWorkAvg = homeWorkSum / marks.Count;
-//			return homeWorkAvg;
-//		}
-//      median count here		
-		public static double MedianAverageCountWithArray()
+		//		Counting homework with an List, when we don't know how much homework there was
+		//		public static double homeWorkAverageCountWithList()
+		//		{
+		//			var marks = new List<double>();
+		//
+		//			Console.WriteLine();
+		//			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
+		//			double notZero = 0;
+		//			do {
+		//				notZero = Convert.ToInt32(Console.ReadLine());
+		//				marks.Add(notZero);
+		//			} while (notZero != 0.0);
+		//			marks.Sort();
+		//
+		//			foreach (var item in marks) {
+		//				homeWorkSum += item;
+		//			}
+		//			homeWorkAvg = homeWorkSum / marks.Count;
+		//			return homeWorkAvg;
+		//		}
+		//      median count here
+		public double MedianAverageCountWithArray()
 		{
 			Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
 			int count = Convert.ToInt32(Console.ReadLine());
 
 			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
 			var marks = new double[100];
-			Student.homeWorkSum = 0;
+			homeWorkSum = 0;
 			homeWorkAvg = 0;
 			
 			for (int i = 0; i < count; i++) {
@@ -111,13 +114,13 @@ namespace C__LD
 			int dir = 0;
 			int secondDir = 0;
 			AvgMed = 0;
-			if(count %2 != 0){
-				dir = (count/2);
-				AvgMed = marks[99-dir];
-			} else if(count %2 == 0){
-				dir = (count/2);
+			if (count % 2 != 0) {
+				dir = (count / 2);
+				AvgMed = marks[99 - dir];
+			} else if (count % 2 == 0) {
+				dir = (count / 2);
 				secondDir = dir - 1;
-				AvgMed = ((marks[99-dir])+(marks[99-secondDir]))/2;
+				AvgMed = ((marks[99 - dir]) + (marks[99 - secondDir])) / 2;
 			}
 			
 			
@@ -126,45 +129,68 @@ namespace C__LD
 			return AvgMed;
 		}
 		
-//		Summing up home work average to exam result, appears the finaAvg
-		public static double sumExamResultWithHomeWorkAverage()
+		//		Summing up home work average to exam result, appears the finaAvg
+		public double sumExamResultWithHomeWorkAverage(Student student)
 		{
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
 			
-			finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
-			return finalAvg;
+			student.finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
+			return student.finalAvg;
 		}
 		
-		public static double sumExamResultWithMedian()
+		public double sumExamResultWithMedian(Student student)
 		{
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
 			
-			finalAvg = (AvgMed * 0.3) + (examResult * 0.7);
-			return finalAvg;
+			student.finalAvg = (AvgMed * 0.3) + (examResult * 0.7);
+			return student.finalAvg;
 		}
 		
-		public static double menuIn()
+		public double menuIn(Student student)
 		{
 			
 			Console.WriteLine("Spauskite 1, jeigu norite kad programa isvestu vidurki");
 			Console.WriteLine("Spauskite 2, jeigu norite kad programa isvestu mediana");
 			int choice = Convert.ToInt32(Console.ReadLine());
-			switch(choice){
+			switch (choice) {
 				case 1:
 					homeWorkAverageCountWithArray();
-					sumExamResultWithHomeWorkAverage();
+					sumExamResultWithHomeWorkAverage(student);
 					break;
 				case 2:
 					MedianAverageCountWithArray();
-					sumExamResultWithMedian();
+					sumExamResultWithMedian(student);
 					break;
 				default:
 					Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
 					break;
 			}
-			return finalAvg;
+			return student.finalAvg;
 		}
+		public void choosing()
+		{
+			int choice = Convert.ToInt32(Console.ReadLine());
+			while (choice != 0) {
+				switch (choice) {					
+					case 1:
+						createNewStudent();
+						break;
+					case 2:
+						showAll();
+						break;
+					case 0:
+						break;
+					default:
+						Console.WriteLine("Netinkamai ivestas pasirinkimas,\nbandykite dar karta");
+						Console.WriteLine();
+						break;
+				}
+				MainClass.menu();
+				choice = Convert.ToInt32(Console.ReadLine());
+			}
+		
 	}
+}
 }
