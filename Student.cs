@@ -41,7 +41,7 @@ namespace C__LD
 		public void showAll()
 		{
 			Console.WriteLine(("").PadLeft(55,'-'));
-			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
+			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas|", "Pavarde|", "Vid");
 			Console.WriteLine(("").PadLeft(55,'-'));
 			foreach (var item in MainClass.students) {
 				Console.WriteLine("{0,-10}{1,-20}{2,20}", item.Name, item.Surname, item.finalAvg);
