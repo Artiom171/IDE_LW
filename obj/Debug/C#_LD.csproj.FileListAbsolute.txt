@@ -14,7 +14,6 @@ C:\C#\C#_LD\bin\Debug\MathNet.Numerics.xml
 C:\C#\IPE_LW\bin\Debug\C#_LD.exe.config
 C:\C#\IPE_LW\bin\Debug\C#_LD.exe
 C:\C#\IPE_LW\bin\Debug\C#_LD.pdb
-C:\C#\IPE_LW\bin\Debug\MathNet.Numerics.xml
 C:\C#\IPE_LW\obj\Debug\C#_LD.csprojResolveAssemblyReference.cache
 C:\C#\IPE_LW\obj\Debug\C#_LD.exe
 C:\C#\IPE_LW\obj\Debug\C#_LD.pdb
