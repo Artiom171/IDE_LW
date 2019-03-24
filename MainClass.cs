@@ -22,6 +22,9 @@ namespace C__LD
 			menu();
 			Student stud = new Student();
 			stud.choosing();
+			if(students.Count <= 1){
+				students.Sort();
+			}
 			Console.ReadKey();
 		}
 		
