@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 
@@ -40,8 +42,9 @@ namespace C__LD
 		//      Print all the students from the sudents list
 		public void showAll()
 		{
+			Console.Clear();
 			Console.WriteLine(("").PadLeft(55, '-'));
-			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas|", "Pavarde|", "Vid");
+			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
 			Console.WriteLine(("").PadLeft(55, '-'));
 			foreach (var item in MainClass.students) {
 				Console.WriteLine("{0,-10}{1,-20}{2,20}", item.Name, item.Surname, item.finalAvg);
@@ -51,6 +54,7 @@ namespace C__LD
 		//		Print one student, last that is created, after it is created
 		public void showStudent(Student student)
 		{
+			Console.Clear();
 			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
 			Console.WriteLine(("").PadLeft(55, '-'));
@@ -58,121 +62,161 @@ namespace C__LD
 		}
 		
 		//		Counting home work average with an array, when we know the amount of home work
-		public double homeWorkAverageCountWithArray()
+		//		public double homeWorkAverageCountWithArray()
+		//		{
+		//			string yesNo = "";
+		//			int count = 0;
+		//			var marks = new double[100];
+		//			do{
+		//				Console.Clear();
+		//				Console.WriteLine(("").PadLeft(55, '-'));
+		//				Console.WriteLine("Noresite sugeneruoti pazymius atsitiktinai?(taip/ne)");
+		//				Console.WriteLine(("").PadLeft(55, '-'));
+		//				yesNo = Console.ReadLine();
+		//				if(yesNo == "ne"){
+		//					Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
+		//					count = Convert.ToInt32(Console.ReadLine());
+		//
+		//					Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//					Console.WriteLine("Demesio!!! Skaiciai turi buti 0 < skaicius <= 10");
+		//
+		//					homeWorkAvg = 0;
+		//
+		//					for (int i = 0; i < count; i++) {
+		//						if(Convert.ToDouble(Console.ReadLine()) > 0 && Convert.ToDouble(Console.ReadLine()) > 10){
+		//						marks[i] = Convert.ToDouble(Console.ReadLine());
+		//						homeWorkSum += marks[i];
+		//						} else{
+		//							Console.WriteLine(("").PadLeft(55, '-'));
+		//							Console.WriteLine("Netinkamas skiacius");
+		//							Console.WriteLine(("").PadLeft(55, '-'));
+		//						}
+		//					}
+		//				} else if(yesNo == "taip"){
+		//					Random random = new Random();
+		//					count = random.Next(1,8);
+		//					for (int i = 0; i < count; i++) {
+		//						marks[i] = random.Next(0,11);
+		//						homeWorkSum += marks[i];
+		//						}
+		//				} else {
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//					Console.WriteLine("Tokio pasirinkimo nere\nbandykite dar karta");
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//				}
+		//			} while(yesNo != "taip" && yesNo != "ne");
+		//
+		//			homeWorkAvg = homeWorkSum / count;
+		//			return homeWorkAvg;
+		//		}
+		
+		//		Counting homework with an List, when we don't know how much homework there was
+		public double homeWorkAverageCountWithList()
 		{
-			string yesNo = "";
-			int count = 0;
-			var marks = new double[100];
-			do{
-				Console.WriteLine(("").PadLeft(55, '-'));
-				Console.WriteLine("Noresite sugeneruoti pazymius atsitiktinai?(taip/ne)");
-				Console.WriteLine(("").PadLeft(55, '-'));
-				yesNo = Console.ReadLine();
-				if(yesNo == "ne"){
-					Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
-					count = Convert.ToInt32(Console.ReadLine());
-
-					Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
-			
-					homeWorkAvg = 0;
-			
-					for (int i = 0; i < count; i++) {
-						marks[i] = Convert.ToDouble(Console.ReadLine());
-						homeWorkSum += marks[i];
-						}
-				} else if(yesNo == "taip"){
-					Random random = new Random();
-					count = random.Next(1,8);
-					for (int i = 0; i < count; i++) {
-						marks[i] = random.Next(0,11);
-						homeWorkSum += marks[i];
-						}
-				} else {
-					Console.WriteLine(("").PadLeft(55, '-'));
-					Console.WriteLine("Tokio pasirinkimo nere\nbandykite dar karta");
-				}
-			} while(yesNo != "taip" && yesNo != "ne");
-			
-			homeWorkAvg = homeWorkSum / count;
+			var marks = new List<double>();
+		
+			Console.WriteLine();
+			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
+			double notZero = 0;
+			do {
+				notZero = Convert.ToInt32(Console.ReadLine());
+				marks.Add(notZero);
+			} while (notZero != 0.0);
+			marks.Sort();
+		
+			foreach (var item in marks) {
+				homeWorkSum += item;
+			}
+			homeWorkAvg = homeWorkSum / marks.Count;
 			return homeWorkAvg;
 		}
 		
-		//		Counting homework with an List, when we don't know how much homework there was
-		//		public static double homeWorkAverageCountWithList()
-		//		{
-		//			var marks = new List<double>();
-		//
-		//			Console.WriteLine();
-		//			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
-		//			double notZero = 0;
-		//			do {
-		//				notZero = Convert.ToInt32(Console.ReadLine());
-		//				marks.Add(notZero);
-		//			} while (notZero != 0.0);
-		//			marks.Sort();
-		//
-		//			foreach (var item in marks) {
-		//				homeWorkSum += item;
-		//			}
-		//			homeWorkAvg = homeWorkSum / marks.Count;
-		//			return homeWorkAvg;
-		//		}
-		//      median count here
-		public double MedianAverageCountWithArray()
+		public double MedianAverageCountWithList()
 		{
-			string yesNo = "";
-			int count = 0;
-			var marks = new double[100];
+			var marks = new List<double>();
+					
+					
+			Console.WriteLine();
+			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
+			double notZero = 0;
 			do {
-				Console.WriteLine(("").PadLeft(55, '-'));
-				Console.WriteLine("Noresite sugeneruoti pazymius atsitiktinai?(taip/ne)");
-				Console.WriteLine(("").PadLeft(55, '-'));
-				yesNo = Console.ReadLine();
-				if (yesNo == "ne") {
-					Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
-					count = Convert.ToInt32(Console.ReadLine());
-
-					Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
-					homeWorkSum = 0;
-					homeWorkAvg = 0;
-			
-					for (int i = 0; i < count; i++) {
-						marks[i] = Convert.ToDouble(Console.ReadLine());
-					}
-				} else if (yesNo == "taip"){
-					Random random = new Random();
-					count = random.Next(1,8);
-					for(int i = 0; i < count; i++){
-						marks[i] = random.Next(0,11);
-					}
-				} else {
-					Console.WriteLine(("").PadLeft(55, '-'));
-					Console.WriteLine("Tokio pasirinkimo nere\nbandykite dar karta");
-				}
-			} while(yesNo != "taip" && yesNo != "ne");
-			
-			Array.Sort(marks);
-			int dir = 0;
-			int secondDir = 0;
-			AvgMed = 0;
-			if (count % 2 != 0) {
-				dir = (count / 2);
-				AvgMed = marks[99 - dir];
-			} else if (count % 2 == 0) {
-				dir = (count / 2);
-				secondDir = dir - 1;
-				AvgMed = ((marks[99 - dir]) + (marks[99 - secondDir])) / 2;
+				notZero = Convert.ToInt32(Console.ReadLine());
+				marks.Add(notZero);
+			} while (notZero != 0.0);
+			marks.Sort();
+					
+			homeWorkAvg = 0;
+			double[] TempArr = marks.ToArray();
+			Array.Sort(TempArr);
+			if (TempArr.Length % 2 == 0) {
+				homeWorkAvg = ((TempArr[(TempArr.Length / 2) - 1] + TempArr[(TempArr.Length / 2)]) / 2);
+			} else{
+				homeWorkAvg = TempArr[(TempArr.Length / 2 - 1)];
 			}
-			
-			
-//			dir is integer that show what element in the array will be the median
-//			Console.WriteLine(finalAvgMed);
-			return AvgMed;
+			return homeWorkAvg;
 		}
+		
+		//		public double MedianAverageCountWithArray()
+		//		{
+		//			string yesNo = "";
+		//			int count = 0;
+		//			var marks = new double[100];
+		//			do {
+		//				Console.Clear();
+		//				Console.WriteLine(("").PadLeft(55, '-'));
+		//				Console.WriteLine("Noresite sugeneruoti pazymius atsitiktinai?(taip/ne)");
+		//				Console.WriteLine(("").PadLeft(55, '-'));
+		//				yesNo = Console.ReadLine();
+		//				if (yesNo == "ne") {
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//					Console.WriteLine("Dabar iveskite atliktu namu darbu skaiciu");
+		//					count = Convert.ToInt32(Console.ReadLine());
+		//
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//					Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius");
+		//					homeWorkSum = 0;
+		//					homeWorkAvg = 0;
+		//
+		//					for (int i = 0; i < count; i++) {
+		//						marks[i] = Convert.ToDouble(Console.ReadLine());
+		//					}
+		//				} else if (yesNo == "taip"){
+		//					Random random = new Random();
+		//					count = random.Next(1,8);
+		//					for(int i = 0; i < count; i++){
+		//						marks[i] = random.Next(0,11);
+		//					}
+		//				} else {
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//					Console.WriteLine("Tokio pasirinkimo nere\nbandykite dar karta");
+		//					Console.WriteLine(("").PadLeft(55, '-'));
+		//				}
+		//			} while(yesNo != "taip" && yesNo != "ne");
+		//
+		//			Array.Sort(marks);
+		//			int dir = 0;
+		//			int secondDir = 0;
+		//			AvgMed = 0;
+		//			if (count % 2 != 0) {
+		//				dir = (count / 2);
+		//				AvgMed = marks[99 - dir];
+		//			} else if (count % 2 == 0) {
+		//				dir = (count / 2);
+		//				secondDir = dir - 1;
+		//				AvgMed = ((marks[99 - dir]) + (marks[99 - secondDir])) / 2;
+		//			}
+			
+			
+		//			dir is integer that show what element in the array will be the median
+		//			Console.WriteLine(finalAvgMed);
+		//			return AvgMed;
+		//	}
 		
 		//		Summing up home work average to exam result, appears the finaAvg
 		public double sumExamResultWithHomeWorkAverage(Student student)
 		{
+			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
 			
@@ -182,6 +226,7 @@ namespace C__LD
 		
 		public double sumExamResultWithMedian(Student student)
 		{
+			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Iveskite egzamino rezultata:");
 			double examResult = Convert.ToDouble(Console.ReadLine());
 			
@@ -191,21 +236,24 @@ namespace C__LD
 		
 		public double menuIn(Student student)
 		{
-			
+			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Spauskite 1, jeigu norite kad programa isvestu vidurki");
 			Console.WriteLine("Spauskite 2, jeigu norite kad programa isvestu mediana");
+			Console.WriteLine(("").PadLeft(55, '-'));
 			int choice = Convert.ToInt32(Console.ReadLine());
 			switch (choice) {
 				case 1:
-					homeWorkAverageCountWithArray();
+					homeWorkAverageCountWithList();
 					sumExamResultWithHomeWorkAverage(student);
 					break;
 				case 2:
-					MedianAverageCountWithArray();
+					MedianAverageCountWithList();
 					sumExamResultWithMedian(student);
 					break;
 				default:
+					Console.WriteLine(("").PadLeft(55, '-'));
 					Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
+					Console.WriteLine(("").PadLeft(55, '-'));
 					break;
 			}
 			return student.finalAvg;
@@ -224,7 +272,10 @@ namespace C__LD
 					case 0:
 						break;
 					default:
+						Console.Clear();
+						Console.WriteLine(("").PadLeft(55, '-'));
 						Console.WriteLine("Netinkamai ivestas pasirinkimas,\nbandykite dar karta");
+						Console.WriteLine(("").PadLeft(55, '-'));
 						Console.WriteLine();
 						break;
 				}
