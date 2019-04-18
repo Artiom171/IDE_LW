@@ -17,7 +17,16 @@ namespace C__LD
 		public double homeWorkAvg{ get; set; }
 		public double homeWorkSum{ get; set; }
 		public double AvgMed{ get; set; }
+		public int examResult{get; set; }
+		public List<int> marks{get; set;}
+		public List<Student> students{get;set;}
 		
+		
+		public Student(){
+		}
+		public Student(string Name, string Surname, int examResult, List<int> marks){
+
+            this.Name = Name; this.Surname = Surname; this.examResult = examResult; this.marks = marks;}
 		
 
 		//      creating new object Student and adding it in the students List
@@ -25,14 +34,14 @@ namespace C__LD
 		{
 			Student student = new Student();
 			Console.WriteLine("Iveskite studento varda:");
-			student.Name = Console.ReadLine();
+			student.Name = Convert.ToString(Console.ReadLine());
 			Console.WriteLine("Iveskite studento pavarde:");
 			student.Surname = Console.ReadLine();
 			
 			
 			Console.WriteLine(("").PadLeft(55, '-'));
 			
-			menuIn(student);
+			menuIn(student, students);
 			//homeWorkAverageCountWithList();
 			MainClass.students.Add(student);
 	
@@ -114,11 +123,11 @@ namespace C__LD
 		//		Counting homework with an List, when we don't know how much homework there was
 		public double homeWorkAverageCountWithList()
 		{
-			var marks = new List<double>();
+			marks = new List<int>();
 		
 			Console.WriteLine();
 			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
-			double notZero = 0;
+			int notZero = 0;
 			do {
 				notZero = Convert.ToInt32(Console.ReadLine());
 				marks.Add(notZero);
@@ -134,12 +143,12 @@ namespace C__LD
 		
 		public double MedianAverageCountWithList()
 		{
-			var marks = new List<double>();
+			marks = new List<int>();
 					
 					
 			Console.WriteLine();
 			Console.WriteLine("Dabar iveskite atliktu namu darbu pazymius,\njeigu daugiau pazymiu nera iveskite 0");
-			double notZero = 0;
+			int notZero = 0;
 			do {
 				notZero = Convert.ToInt32(Console.ReadLine());
 				marks.Add(notZero);
@@ -147,7 +156,7 @@ namespace C__LD
 			marks.Sort();
 					
 			homeWorkAvg = 0;
-			double[] TempArr = marks.ToArray();
+			int[] TempArr = marks.ToArray();
 			Array.Sort(TempArr);
 			if (TempArr.Length % 2 == 0) {
 				homeWorkAvg = ((TempArr[(TempArr.Length / 2) - 1] + TempArr[(TempArr.Length / 2)]) / 2);
@@ -218,7 +227,7 @@ namespace C__LD
 		{
 			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Iveskite egzamino rezultata:");
-			double examResult = Convert.ToDouble(Console.ReadLine());
+			examResult = Convert.ToInt32(Console.ReadLine());
 			
 			student.finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
 			return student.finalAvg;
@@ -228,33 +237,39 @@ namespace C__LD
 		{
 			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Iveskite egzamino rezultata:");
-			double examResult = Convert.ToDouble(Console.ReadLine());
+			examResult = Convert.ToInt32(Console.ReadLine());
 			
 			student.finalAvg = (AvgMed * 0.3) + (examResult * 0.7);
 			return student.finalAvg;
 		}
 		
-		public double menuIn(Student student)
+		public double menuIn(Student student, List<Student> students)
 		{
 			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("Spauskite 1, jeigu norite kad programa isvestu vidurki");
 			Console.WriteLine("Spauskite 2, jeigu norite kad programa isvestu mediana");
+			
 			Console.WriteLine(("").PadLeft(55, '-'));
+			try {
 			int choice = Convert.ToInt32(Console.ReadLine());
-			switch (choice) {
-				case 1:
-					homeWorkAverageCountWithList();
-					sumExamResultWithHomeWorkAverage(student);
-					break;
-				case 2:
-					MedianAverageCountWithList();
-					sumExamResultWithMedian(student);
-					break;
-				default:
-					Console.WriteLine(("").PadLeft(55, '-'));
-					Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
-					Console.WriteLine(("").PadLeft(55, '-'));
-					break;
+				switch (choice) {
+					case 1:
+						homeWorkAverageCountWithList();
+						sumExamResultWithHomeWorkAverage(student);
+						break;
+					case 2:
+						MedianAverageCountWithList();
+						sumExamResultWithMedian(student);
+						break;
+					default:
+						Console.WriteLine(("").PadLeft(55, '-'));
+						Console.WriteLine("Neteisingai ivestas pasirinkimas, bandykite dar karta");
+						Console.WriteLine(("").PadLeft(55, '-'));
+						break;
+				}
+			} catch(Exception ex) {
+				Console.WriteLine("Iveskite skaicius!");
+				menuIn(student,students);
 			}
 			return student.finalAvg;
 		}
@@ -268,6 +283,9 @@ namespace C__LD
 						break;
 					case 2:
 						showAll();
+						break;
+					case 3:
+						students.AddRange(FileReader.ReadFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
 						break;
 					case 0:
 						break;
