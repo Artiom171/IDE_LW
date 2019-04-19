@@ -1,4 +1,5 @@
 ﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,17 @@ namespace C__LD
 		public double AvgMed{ get; set; }
 		public int examResult{get; set; }
 		public List<int> marks{get; set;}
-		public List<Student> students{get;set;}
-		
-		
-		public Student(){
-		}
-		public Student(string Name, string Surname, int examResult, List<int> marks){
+        public double final { get; set; }
 
-            this.Name = Name; this.Surname = Surname; this.examResult = examResult; this.marks = marks;}
+
+
+
+        public Student(){
+		}
+		public Student(string Name, string Surname, double final){
+
+            this.Name = Name; this.Surname = Surname; this.final = final;
+        }
 		
 
 		//      creating new object Student and adding it in the students List
@@ -41,7 +45,7 @@ namespace C__LD
 			
 			Console.WriteLine(("").PadLeft(55, '-'));
 			
-			menuIn(student, students);
+			menuIn(student, MainClass.students);
 			//homeWorkAverageCountWithList();
 			MainClass.students.Add(student);
 	
@@ -49,14 +53,14 @@ namespace C__LD
 		}
 		
 		//      Print all the students from the sudents list
-		public void showAll()
+		public void showAll(double final)
 		{
 			Console.Clear();
 			Console.WriteLine(("").PadLeft(55, '-'));
 			Console.WriteLine("{0,-10}{1,-20}{2,20}", "Vardas", "Pavarde", "Vid");
 			Console.WriteLine(("").PadLeft(55, '-'));
 			foreach (var item in MainClass.students) {
-				Console.WriteLine("{0,-10}{1,-20}{2,20}", item.Name, item.Surname, item.finalAvg);
+				Console.WriteLine("{0,-10}{1,-20}{2,20}", item.Name, item.Surname, item.final);
 			}
 		}
 
@@ -232,6 +236,7 @@ namespace C__LD
 			student.finalAvg = (homeWorkAvg * 0.3) + (examResult * 0.7);
 			return student.finalAvg;
 		}
+
 		
 		public double sumExamResultWithMedian(Student student)
 		{
@@ -282,10 +287,10 @@ namespace C__LD
 						createNewStudent();
 						break;
 					case 2:
-						showAll();
+						showAll(final);
 						break;
 					case 3:
-						students.AddRange(FileReader.ReadFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
+						MainClass.students.AddRange(FileReader.ReadFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
 						break;
 					case 0:
 						break;

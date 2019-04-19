@@ -20,6 +20,7 @@ C:\C#\IPE_LW\obj\Debug\C#_LD.pdb
 C:\C#\IDE_LW\bin\Debug\C#_LD.exe.config
 C:\C#\IDE_LW\bin\Debug\C#_LD.exe
 C:\C#\IDE_LW\bin\Debug\C#_LD.pdb
-C:\C#\IDE_LW\obj\Debug\C#_LD.csprojResolveAssemblyReference.cache
 C:\C#\IDE_LW\obj\Debug\C#_LD.exe
 C:\C#\IDE_LW\obj\Debug\C#_LD.pdb
+C:\C#\IDE_LW\obj\Debug\C#_LD.csprojAssemblyReference.cache
+C:\C#\IDE_LW\obj\Debug\C#_LD.csproj.CoreCompileInputs.cache
