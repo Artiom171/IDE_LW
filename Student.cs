@@ -42,8 +42,22 @@ namespace C__LD
             Student student = new Student();
             Console.WriteLine("Iveskite studento varda:");
             student.Name = Convert.ToString(Console.ReadLine());
+            if (!(student.Name.All(char.IsLetter)))
+            {
+                Console.WriteLine(("").PadLeft(55, '-'));
+                Console.WriteLine("Vardo bei pavardes visi simboliai turi buti raides!");
+                Console.WriteLine(("").PadLeft(55, '-'));
+                createNewStudent();
+            }
             Console.WriteLine("Iveskite studento pavarde:");
-            student.Surname = Console.ReadLine();
+            student.Surname = Convert.ToString(Console.ReadLine());
+            if (!(student.Surname.All(char.IsLetter)))
+            {
+                Console.WriteLine(("").PadLeft(55, '-'));
+                Console.WriteLine("Vardo bei pavardes visi simboliai turi buti raides!");
+                Console.WriteLine(("").PadLeft(55, '-'));
+                createNewStudent();
+            }
 
             Console.WriteLine(("").PadLeft(55, '-'));
 

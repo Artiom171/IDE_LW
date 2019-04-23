@@ -43,13 +43,13 @@ namespace C__LD
 
         public static List<Student> ReadFile()
         {
-            List<Student> studentai = new List<Student>();
+            List<Student> students = new List<Student>();
             try
             {
                 string[] lines = File.ReadAllLines("..\\..\\kursiokai.txt");
                 lines = lines.Skip(1).ToArray();
 
-                studentai.AddRange(ToObjectFromLines(lines));
+                students.AddRange(ToObjectFromLines(lines));
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -57,7 +57,7 @@ namespace C__LD
                 Console.ReadKey();
                 Environment.Exit(0);
             }
-            return studentai;
+            return students;
         }
     }
 }
