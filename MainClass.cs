@@ -14,6 +14,7 @@ namespace C__LD
 			Console.WriteLine("1 - irasyti nauja studenta");
 			Console.WriteLine("2 - perziureta sarasa esamu studentu");
 			Console.WriteLine("3 - nuskaito iš failo");
+            Console.WriteLine("4 - sugeneruoti studentus i atskirus failus");
 			Console.WriteLine("0 - baigti darba");
 			Console.WriteLine(("").PadLeft(55,'-'));
         }

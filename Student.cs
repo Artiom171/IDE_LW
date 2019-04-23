@@ -248,6 +248,9 @@ namespace C__LD
                         case 3:
                             MainClass.students.AddRange(FileReader.ReadFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
                             break;
+                        case 4:
+                            FileWriter.generateStudents();
+                            break;
                         case 0:
                             break;
                         default:
