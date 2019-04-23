@@ -27,7 +27,7 @@ namespace C__LD
                 outfile.Flush();
                 outfile.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("Klaida, iveskite skaiciu");
                 generateStudents();

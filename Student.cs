@@ -19,7 +19,7 @@ namespace C__LD
         public double homeWorkAvg { get; set; }
         public double homeWorkSum { get; set; }
         public double AvgMed { get; set; }
-        public int examResult { get; set; }
+        public double examResult { get; set; }
         public List<int> marks { get; set; }
         public double final { get; set; }
 
@@ -31,8 +31,16 @@ namespace C__LD
         }
         public Student(string Name, string Surname, double final)
         {
-
-            this.Name = Name; this.Surname = Surname; this.final = final;
+            this.Name = Name;
+            this.Surname = Surname;
+            this.final = final;
+        }
+        public Student(string Name, string Surname, double examResult, List<int> marks)
+        {
+            this.Name = Name;
+            this.Surname = Surname;
+            this.final = final;
+            this.marks = marks;
         }
 
 
@@ -260,10 +268,13 @@ namespace C__LD
                             showAll(final);
                             break;
                         case 3:
-                            MainClass.students.AddRange(FileReader.ReadFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
+                            MainClass.students.AddRange(FileReader.readFile().OrderBy(x => x.Name).ThenBy(x => x.Surname).ToList());
                             break;
                         case 4:
                             FileWriter.generateStudents();
+                            break;
+                        case 5:
+                            SplitStudents.splitStudentFile();
                             break;
                         case 0:
                             break;

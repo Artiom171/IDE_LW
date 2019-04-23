@@ -54,6 +54,7 @@
     <Compile Include="FileReader.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplitStudents.cs" />
     <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
