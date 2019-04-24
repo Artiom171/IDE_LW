@@ -16,19 +16,29 @@ namespace C__LD
             {
                 if (separatedWords.Length >= 4)
                 {
-                    for (int i = 2; i <= separatedWords.Length; i++)
+                    for (int i = 2; i < separatedWords.Length - 1; i++)
                     {
                         marks.Add(int.Parse(separatedWords[i]));
-                    }
+                    }  
                 }
+                int sumOfMarks = 0;
+                foreach (int item in marks)
+                {
+                    sumOfMarks += item;
+                }
+                double marksAvg = sumOfMarks / marks.Count;
+                double final = (marksAvg * 0.7) + (examResult * 0.3);
+                Student StudentObject = new Student(separatedWords[0], separatedWords[1], final);
+                return StudentObject;
             }
-            catch (Exception)
+            
+            catch (Exception ex)
             {
-                Console.WriteLine("Bad file format");
+                Console.WriteLine("Bad file format" + ex.Message);
+                Console.ReadKey();
                 Environment.Exit(0);
             }
-            Student StudentObject = new Student(separatedWords[0], separatedWords[1], examResult, marks);
-            return StudentObject;
+            return null;
         }
 
         public static List<Student> toObjectFromLines(string[] LinesFromFile)
