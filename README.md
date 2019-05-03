@@ -23,10 +23,10 @@ order students ascedenticly.
 
 ## Instruction
 
-### Always follow the what console asks you to do
-### Input only what is needed. Do not input some digits, when you are asked "Name" or "Surname"
-### In order to install, you need to have a working C# development IDEA
-### Open IDEA, open another project, open the file whit .csproj extension
-### And hope you enjoy :)
+#### Always follow the what console asks you to do
+#### Input only what is needed. Do not input some digits, when you are asked "Name" or "Surname"
+#### In order to install, you need to have a working C# development IDEA
+#### Open IDEA, open another project, open the file whit .csproj extension
+#### And hope you enjoy :)
 
 ### P.S. If you want to make some adjustments -> start working on it -> create your branch -> create "Pull Request"
